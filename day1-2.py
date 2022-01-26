@@ -24,26 +24,11 @@ def palindrome(word):
             return False
     return True
 
-if palindrome('a') :
-    print("True")
-else : print("False")
-
-if palindrome('racecar') :
-    print("True")
-else : print("False")
-
-if palindrome('') :
-    print("True")
-else : print("False")
-
-if palindrome('radar') :
-    print("True")
-else : print("False")
-
-if palindrome('halibut') :
-    print("True")
-else : print("False")
-
+print(palindrome('a'))
+print(palindrome('racecar'))
+print(palindrome(''))
+print(palindrome('radar'))
+print(palindrome('halibut'))
 print("---------------------------------------------------------------------")
 
 def another_palindrome(word):
