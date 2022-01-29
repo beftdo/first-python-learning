@@ -116,7 +116,7 @@ print(re.findall('fish tonight\.$', source))
 print(re.findall('[wf]ish', source)) #[abc] a 또는 b 또는 c = a|b|c
 print(re.findall('[wsh]+', source)) #prev +는 하나 이상을 패턴 의미, wsh 중 하나 이상 붙어있는 문자열 찾음
 print(re.findall('ght\W', source)) #\W는 알파벳 문자가 아닌것
-print(re.findall('I (?=wish)', source)) # prev(?=next) 뒤에 next가 오는 prev 뒤에 wish가 오는 I
+print(re.findall('I (?=wish)', source)) # prev(?=next) 뒤에 next가 오는 prev / 뒤에 wish가 오는 I
 print(re.findall('(?<=I) wish', source)) # (?<=prev) next  앞에 prev가 오는 next 찾음
 
 #정규 표현식 패턴이 파이썬 문자열 규칙과 충돌하는 경우
@@ -135,3 +135,47 @@ m = re.search(r'(?P<DISH>. dish\b).*(?P<FISH>\bfish)', source)
 print(m.group())
 print(m.group('DISH'))
 print(m.group('FISH'))
+
+
+print("---------------------------------------------------------------------")
+#연습문제
+mammoth = '''We have seen thee, queen of cheese,
+Lying quietly at your ease,
+Gently fanned by evening breeze,
+Thy fair form no flies dare seize.
+All gaily dressed soon you'll go
+To the great Provincial show,
+To be admired by many a beau
+In the city of Toronto.
+Cows numerous as a swarm of bees,
+Or as the leaves upon the trees,
+It did require to make thee please,
+And stand unrivalled, queen of cheese.[Pg 72]
+May you not receive a scar as
+We have heard that Mr. Harris
+Intends to send you off as far as
+The great world's show at Paris.
+Of the youth beware of these,
+For some of them might rudely squeeze
+And bite your cheek, then songs or glees
+We could not sing, oh! queen of cheese.
+We'rt thou suspended from balloon,
+You'd cast a shade even at noon,
+Folks would think it was the moon
+About to fall and crush them soon.'''
+
+import re
+print(re.findall(r'\bc\w*' , mammoth))
+#\b는 단어와 비단어 사이의 경계의 시작을 의미. 단어의 시작이나 끝을 지정하기 위해 \b 사용
+print(re.findall(r'\bc\w{3}\b' , mammoth))
+#단어의 끝을 표시하기 위해 마지막에 \b사용. 마지막 \b를 빼면 c로 시작하는 네글자 이상의 모든 단어 중
+#처음 네 글자가 다 검색됨 ex)cheese -> chee
+print(re.findall(r'\b\w*r\b' , mammoth))
+print(re.findall(r'\b\w*l\b', mammoth))
+#\w 패턴은 작은따옴표를 제외한 문자, 숫자 언더바만 매칭하기 때문에 정확하다고 보기 힘듦
+print(re.findall(r'\b[\w\']*l\b', mammoth)) #이스케이프 문자 아니면 큰따옴표 사용
+print(re.findall(r"\b[\w']*l\b", mammoth))
+print(re.findall(r'\b\w*[aeiou]{3}[^aeiou]*\w*\b' , mammoth))
+#\w*는 0회 이상이기 때문에 있을 수도 없을 수도 있음. 비모음 문자를 단어의 끝에 넣기 위해
+#[^aeiou] 사용. 하지만 beau\nIn 출력. 줄바꿈 문자 제외 필요 + 공백문자
+print(re.findall(r'\b\w*[aeiou]{3}[^aeiou\s]*\w*\b' , mammoth))

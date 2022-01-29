@@ -104,3 +104,16 @@ place = 'caf\u00e9'
 byte_value = place.encode('ascii', 'xmlcharrefreplace')
 print(byte_value) #인코딩된 아스키 문자의 바이트 타입 반환
 print(byte_value.decode()) #HTML 호환 문자열로 변환
+
+print("---------------------------------------------------------------------")
+# 연습문제
+import unicodedata
+mystery = '\U0001f4a9'
+print(1, mystery, unicodedata.name(mystery))
+
+pop_bytes = mystery.encode('UTF-8')
+print(2, pop_bytes)
+
+pop_string = pop_bytes.decode()
+print(3, pop_string)
+print(4, mystery == pop_string)
