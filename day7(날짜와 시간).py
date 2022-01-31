@@ -100,3 +100,60 @@ print(list(now[x] for x in range(9)))
 tm = time.localtime()
 print(time.mktime(tm)) 
 #mktime() 메서드는 sturct_time 객체를 에폭 초로 변환
+
+import time
+now = time.time()
+print(time.ctime(now)) #ctime() 함수는 에폭 시간을 문자열로 변환
+
+#strftime()을 사용하여 날짜와 시간을 문자열로 변환할 수 있다.
+#문자열의 출력 포맷을 지정
+# %Y:년 / %m:월 / %B:월 이름 / %b:월 축약 이름 / %d:월의 일자
+# %A:요일 이름 / %a:요일 축약 이름 / %H 24시간 / %I 12시간
+# %p:오전/오후 / %M:분 / %S:초
+
+#time 모듈에서 제공하는 strftime()함수
+import time
+fmt = "It's %A, %B %d, %Y, local time %I:%M:%S%p"
+#먼저 포멧 문자열 fmt 정의
+t = time.localtime()
+print(t)
+print(time.strftime(fmt, t))
+
+#date 객체의 strftime 메서드 사용
+from datetime import date
+some_day = date(2019, 7, 4)
+fmt = "It's %A, %B %d, %Y, local time %I:%M:%S%p"
+print(some_day.strftime(fmt)) 
+#날짜 부분만 작동, 시간은 기본값으로 자정으로 지정
+
+#time 객체의 strftime 메서드 사용
+from datetime import time
+fmt = "It's %A, %B %d, %Y, local time %I:%M:%S%p"
+some_time = time(10, 35)
+print(some_time.strftime(fmt))
+
+import time
+fmt = "%Y-%m-%d"
+print(time.strptime("2019-01-29", fmt))
+
+import time
+fmt = "%Y %m %d"
+print(time.strptime("2019 01 29", fmt))
+
+'''
+다른 월, 일의 이름을 출력하려면 setlocale()을 사용하여 국제화 설정인 로케일(locale)을 바꿔야 한다.
+'''
+
+import locale
+from datetime import date
+halloween = date(2019, 10, 31)
+for lang_country in ['en_us', 'fr_fr',]:
+    locale.setlocale(locale.LC_TIME, lang_country)
+    print(halloween.strftime('%A, %B %d'))
+
+#lang_country의 값
+import locale
+names = locale.locale_alias.keys()
+good_names = [name for name in names if \
+    len(name) == 5 and name[2] == '_']
+print(good_names)
