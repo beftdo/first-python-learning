@@ -218,5 +218,18 @@ os.link('oops.txt', 'yikes.txt')
 print(os.path.isfile('yikes.txt'))
 print(os.path.islink('yikes.txt'))
 
-os.symlink('oops.txt','jeepers.txt')
-print(os.path.islink('jeepers.txt'))
+#os.symlink('oops.txt','jeepers.txt')
+#print(os.path.islink('jeepers.txt'))
+
+#권한 바꾸기
+os.chmod('oops.txt', 0o400)
+
+import stat
+os.chmod('oops.txt', stat.S_IRUSR)
+
+'''uid = 5
+gid = 22
+os.chown('oops', uid, gid)'''
+
+os.remove('oops.txt')
+print(os.path.exists('oops.txt'))
